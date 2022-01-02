@@ -1,8 +1,14 @@
 import childProcess from "child_process";
 import bills from "./bills.js";
+import yargs from 'yargs';
+import { hideBin } from 'yargs/helpers';
+
+const argv = yargs(hideBin(process.argv)).argv
+const BATCH_SIZE = 100 || argv.batch;
+
+console.info("Running with config", {BATCH_SIZE});
 
 function runScript(scriptPath, args, callback) {
-
     // keep track of whether callback has been invoked to prevent multiple invocations
     var invoked = false;
 
@@ -25,7 +31,6 @@ function runScript(scriptPath, args, callback) {
 
 }
 
-const BATCH_SIZE = 100;
 const billsLength = bills.length;
 const iterations = Math.ceil(billsLength / BATCH_SIZE);
 for (let i = 0; i < iterations; i++) {
