@@ -8251,6 +8251,4 @@ const bills = [
     "A40002"
 ]
 
-module.exports = {
-    bills
-}
+export default bills;
